@@ -55,14 +55,14 @@
             </div>*@
         </div>
 
-        @foreach(var topic in Model.Topics)
+        @*@foreach(var topic in Model.Topics)
         {
             <div class="form-group">
                 @Html.CheckBoxFor(m => false)
                 @Html.HiddenFor(m => topic.TopicName)
                 @Html.DisplayFor(m => topic.TopicName)
             </div>
-        }
+        }*@
         
 
 
