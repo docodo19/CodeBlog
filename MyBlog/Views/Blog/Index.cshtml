@@ -1,0 +1,40 @@
+﻿@model MyBlog.Domain.ViewModels.BlogIndexViewModel
+
+@{
+    ViewBag.Title = "Blog Group";
+}
+
+<h2>Blog Group</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateBlogGroup")
+</p>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(m => Model.BlogGroup.GroupName)</th>
+        <th>@Html.DisplayNameFor(m => Model.BlogGroup.GroupDescription)</th>
+        <th></th>
+    </tr>
+    
+
+    @foreach (var item in Model.BlogGroups)
+    {
+        
+            <tr>
+                <td>
+                    @Html.ActionLink(item.GroupName, "Index", "Blog", new { id = item.Id})
+                </td>
+                <td>
+                    @Html.DisplayFor(m => item.GroupDescription)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        
+
+    }
+
+</table>
