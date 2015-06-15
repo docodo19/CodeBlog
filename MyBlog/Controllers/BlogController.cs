@@ -32,13 +32,13 @@ namespace MyBlog.Controllers
         [HttpGet]
         public ActionResult CreateBlogGroup()
         {
-            var model = _repo.GetEmptyBlogGroupWithTopicList();
+            var model = _repo.GetBlogCreateBlogGroupViewModel();
             return View(model);
         }
 
         // POST: Post BloggGroup
         [HttpPost]
-        public ActionResult CreateBlogGroup(BlogGroup model)
+        public ActionResult CreateBlogGroup(BlogCreateBlogGroupViewModel model)
         {
             if(ModelState.IsValid)
             {

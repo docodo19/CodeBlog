@@ -6,11 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MyBlog.Services.Repository;
+using MyBlog.Domain.ViewModels;
+using MyBlog.Data;
 
 namespace MyBlog.Services.Service
 {
     public class BlogService : MyBlog.Domain.Interface.IBlogService
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         private IGenericRepository _repo;
         public BlogService(IGenericRepository repo)
         {
@@ -56,14 +59,46 @@ namespace MyBlog.Services.Service
             return model;
         }
 
-        //Save Blog Group
-        public void SaveBlogGroup(BlogGroup model, string userId)
+        //Get BlogCreateBlogGroupsViewModel
+        public BlogCreateBlogGroupViewModel GetBlogCreateBlogGroupViewModel()
         {
-            model.User_Id = userId;
-            model.TimeCreated = DateTime.Now;
-            model.TimeModified = DateTime.Now;
-            _repo.Add<BlogGroup>(model);
+            var model = new BlogCreateBlogGroupViewModel();
+
+            model.BlogGroup.Topics = _repo.Query<Topic>().OrderBy(t => t.TopicName).ToList();
+
+            foreach(var topic in model.BlogGroup.Topics)
+            {
+                model.TopicCheckBoxes.Add(new TopicCheckBox { TopicName = topic.TopicName });
+            }
+
+            return model;
+        }
+
+        //Save Blog Group
+        public void SaveBlogGroup(BlogCreateBlogGroupViewModel model, string userId)
+        {
+            model.BlogGroup.User_Id = userId;
+            model.BlogGroup.TimeCreated = DateTime.Now;
+            model.BlogGroup.TimeModified = DateTime.Now;
+            model.BlogGroup.Topics = new List<Topic>();
+
+            foreach (var item in model.TopicCheckBoxes)
+            {
+                if (item.IsSelected == true)
+                {
+                    var topic = db.Topics.Where(t => t.TopicName == item.TopicName).FirstOrDefault();
+                    model.BlogGroup.Topics.Add(topic);
+                }
+            }
+
+            _repo.Add<BlogGroup>(model.BlogGroup);
             _repo.SaveChanges();
+
+            
+
+            
+
+            
         }
 
 

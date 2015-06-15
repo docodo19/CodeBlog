@@ -1,4 +1,5 @@
 ﻿using MyBlog.Domain.Models;
+using MyBlog.Domain.ViewModels;
 using System;
 using System.Collections.Generic;
 namespace MyBlog.Domain.Interface
@@ -11,6 +12,7 @@ namespace MyBlog.Domain.Interface
         IList<Blog> GetBlogs(string userId);
         IList<BlogGroup> GetBlogsAndBlogGroups(string userId);
         BlogGroup GetEmptyBlogGroupWithTopicList();
-        void SaveBlogGroup(BlogGroup model, string userId);
+        BlogCreateBlogGroupViewModel GetBlogCreateBlogGroupViewModel();
+        void SaveBlogGroup(BlogCreateBlogGroupViewModel model, string userId);
     }
 }
