@@ -10,5 +10,6 @@ namespace MyBlog.Domain.Models
     {
         public DateTime? TimeCreated { get; set; }
         public DateTime? TimeModified { get; set; }
+        public bool IsActive { get; set; }
     }
 }

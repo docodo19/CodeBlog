@@ -10,6 +10,7 @@ namespace MyBlog.Domain.Models
     {
         public string TopicName { get; set; }
         public bool IsSelected { get; set; }
+        public int TopicId { get; set; }
         public TopicCheckBox()
         {
             this.IsSelected = false;

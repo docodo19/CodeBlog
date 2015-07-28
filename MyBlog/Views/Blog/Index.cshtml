@@ -22,13 +22,13 @@
         
             <tr>
                 <td>
-                    @Html.ActionLink(item.GroupName, "Index", "Blog", new { id = item.Id})
+                    @Html.ActionLink(item.GroupName, "Blogs", new { id = item.Id})
                 </td>
                 <td>
                     @Html.DisplayFor(m => item.GroupDescription)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Edit", "EditBlogGroup", new { id = item.Id }) |
                     @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                 </td>

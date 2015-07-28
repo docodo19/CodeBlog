@@ -1,0 +1,73 @@
+﻿@model MyBlog.Domain.ViewModels.BlogEditBlogGroupViewModel
+
+@{
+    ViewBag.Title = "EditBlogGroup";
+}
+
+<h2>EditBlogGroup</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.BlogGroup.Id);
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BlogGroup.GroupName, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.BlogGroup.GroupName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.BlogGroup.GroupName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BlogGroup.GroupDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.BlogGroup.GroupDescription, new { @class = "form-control textareafor" })
+            @Html.ValidationMessageFor(model => model.BlogGroup.GroupDescription, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.HiddenFor(model => model.BlogGroup.User_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+        @*<div class="col-md-10">
+                @Html.EditorFor(model => model.User_Id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.User_Id, "", new { @class = "text-danger" })
+            </div>*@
+    </div>
+
+    <div class="row">
+        <div class="col-sm-10 col-sm-offset-2">
+            <div class="col-sm-12">
+                @for (var i = 0; i < Model.TopicCheckBoxes.Count; i++)
+                {
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            @Html.CheckBoxFor(m => m.TopicCheckBoxes[i].IsSelected)
+                            @Html.HiddenFor(m => m.TopicCheckBoxes[i].TopicName)
+                            @Html.DisplayFor(m => m.TopicCheckBoxes[i].TopicName)
+                            @Html.HiddenFor(m => m.TopicCheckBoxes[i].TopicId)
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-offset-2 col-md-10">
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

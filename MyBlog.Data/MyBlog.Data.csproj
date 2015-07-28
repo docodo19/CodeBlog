@@ -53,9 +53,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
-    <Compile Include="Migrations\201506120607438_Initial.cs" />
-    <Compile Include="Migrations\201506120607438_Initial.Designer.cs">
-      <DependentUpon>201506120607438_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201506152333454_Initial.cs" />
+    <Compile Include="Migrations\201506152333454_Initial.Designer.cs">
+      <DependentUpon>201506152333454_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506152338268_Added_IsActive.cs" />
+    <Compile Include="Migrations\201506152338268_Added_IsActive.Designer.cs">
+      <DependentUpon>201506152338268_Added_IsActive.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,8 +75,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201506120607438_Initial.resx">
-      <DependentUpon>201506120607438_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201506152333454_Initial.resx">
+      <DependentUpon>201506152333454_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506152338268_Added_IsActive.resx">
+      <DependentUpon>201506152338268_Added_IsActive.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

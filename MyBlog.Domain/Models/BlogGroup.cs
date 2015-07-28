@@ -13,8 +13,11 @@ namespace MyBlog.Domain.Models
     {
         [Key]
         public int Id { get; set; }
+
         [DisplayName("Blog Group")]
+        [Required(ErrorMessage="Group Name is Required")]
         public string GroupName { get; set; }
+
         [DisplayName("Description")]
         public string GroupDescription { get; set; }
 
@@ -25,5 +28,11 @@ namespace MyBlog.Domain.Models
         //Relationship
         public ICollection<Blog> Blogs { get; set; }
         public ICollection<Topic> Topics { get; set; }
+
+
+        public BlogGroup()
+        {
+            this.IsActive = true;
+        }
     }
 }

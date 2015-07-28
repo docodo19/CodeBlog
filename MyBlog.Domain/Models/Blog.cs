@@ -12,7 +12,9 @@ namespace MyBlog.Domain.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required(ErrorMessage="Subject is Required")]
         public string Subject { get; set; }
+        [Required(ErrorMessage="Message is Required")]
         public string Message { get; set; }
 
 
@@ -21,7 +23,10 @@ namespace MyBlog.Domain.Models
         public BlogGroup BlogGroup { get; set; }
 
 
-
+        public Blog()
+        {
+            this.IsActive = true;
+        }
         //Relationship
         
         

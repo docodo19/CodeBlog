@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace MyBlog.Domain.ViewModels
 {
-    public class BlogCreateBlogGroupViewModel
+    public class BlogEditBlogGroupViewModel
     {
         public BlogGroup BlogGroup { get; set; }
         public List<TopicCheckBox> TopicCheckBoxes { get; set; }
 
-        public BlogCreateBlogGroupViewModel()
+        public BlogEditBlogGroupViewModel()
         {
             this.BlogGroup = new BlogGroup();
             this.BlogGroup.Topics = new List<Topic>();

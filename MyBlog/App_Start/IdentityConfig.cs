@@ -13,6 +13,7 @@ using Microsoft.Owin.Security;
 using MyBlog.Models;
 using MyBlog.Domain.Models;
 using MyBlog.Data;
+using SendGrid;
 
 namespace MyBlog
 {
@@ -23,6 +24,14 @@ namespace MyBlog
             // Plug in your email service here to send an email.
             return Task.FromResult(0);
         }
+
+        //private Task configSendGridasync(IdentityMessage message)
+        //{
+        //    var myMessage = new SendGridMessage();
+        //    myMessage.AddTo(message.Destination);
+        //    myMessage.From = 
+        //}
+
     }
 
     public class SmsService : IIdentityMessageService

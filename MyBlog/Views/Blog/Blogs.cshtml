@@ -1,0 +1,60 @@
+﻿@model MyBlog.Domain.ViewModels.BlogBlogsViewModel
+
+@{
+    ViewBag.Title = "Blogs";
+}
+
+<h2>Blogs for "@Model.BlogGroup.GroupName"</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateBlog", new { id = Model.BlogGroup.Id })
+</p>
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Blog.TimeCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Blog.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Blog.Message)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Blogs)
+    {
+        <tr>
+            <td>
+                @if (item.TimeCreated == null)
+                {
+                    <p>[N/A]</p>
+                }else
+                {
+                    <p>[@Html.DisplayFor(modelItem => item.TimeCreated)]</p>
+                }
+
+                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditBlog", new { id = item.Id }) |
+                @Html.ActionLink("Details", "BlogDetails", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "DeleteBlog", new { id = item.Id })
+
+                @Html.HiddenFor(modelItem => item.TimeModified)
+                @Html.HiddenFor(modelItem => item.IsActive)
+                @Html.HiddenFor(modelItem => item.BlogGroup_Id)
+
+            </td>
+        </tr>
+    }
+
+</table>

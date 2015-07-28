@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace MyBlog.Controllers
 {
+    [Authorize]
     public class BlogController : Controller
     {
         private IBlogService _repo;
@@ -52,39 +53,48 @@ namespace MyBlog.Controllers
             }
         }
 
-
-
-        // GET: Blog/Details/5
-        public ActionResult Details(int id)
+        [HttpGet]
+        public ActionResult EditBlogGroup(int id)
         {
-            return View();
+            var userId = User.Identity.GetUserId();
+            var model = _repo.GetBlogEditBlogGroupViewModel(id, userId);
+            return View(model);
         }
 
-        // GET: Blog/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Blog/Create
+        
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult EditBlogGroup(BlogEditBlogGroupViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
+                var userId = User.Identity.GetUserId();
+                _repo.SaveEditedBlogGroup(model, userId);
                 return RedirectToAction("Index");
             }
-            catch
+            else
             {
                 return View();
             }
         }
 
+
+
+        // GET: Blog/Details/5
+        public ActionResult Details(int id)
+        {
+            var userId = User.Identity.GetUserId();
+            var model = _repo.GetBlogGroupDetails(id, userId);
+
+
+            return View(model);
+        }
+
+      
+
         // GET: Blog/Edit/5
         public ActionResult Edit(int id)
         {
+            
             return View();
         }
 
@@ -107,23 +117,89 @@ namespace MyBlog.Controllers
         // GET: Blog/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var userId = User.Identity.GetUserId();
+            var model = _repo.GetBlogGroup(id, userId);
+            return View(model);
         }
 
         // POST: Blog/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(BlogGroup model)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            var userId = User.Identity.GetUserId();
+            _repo.DeleteBlogGroup(model.Id, userId);
+            return RedirectToAction("Index");
+          
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+
+        // GET: Get list of Blogs associated with the BlogGroup
+        [HttpGet]
+        public ActionResult Blogs(int id)
+        {
+            var userId = User.Identity.GetUserId();
+            var model = _repo.GetBlogs(userId, id);
+            return View(model);
+        }
+        
+        // GET: Create Blog
+        public ActionResult CreateBlog(int id)
+        {
+            var model = new Blog();
+            model.BlogGroup_Id = id;
+            return View(model);
+        }
+
+        // POST: Create Blog
+        [HttpPost]
+        public ActionResult CreateBlog(Blog model)
+        {
+            _repo.SaveBlog(model);
+            return RedirectToAction("Blogs", new { id = model.BlogGroup_Id });
+        }
+
+        /// <summary>
+        /// Blog Details Section
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult BlogDetails(int id)
+        {
+            return View(_repo.GetBlog(User.Identity.GetUserId(), id));
+        }
+
+        /// <summary>
+        /// Edit Blog Section
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult EditBlog(int id)
+        {
+            return View(_repo.GetBlog(User.Identity.GetUserId(), id));
+        }
+
+        [HttpPost]
+        public ActionResult EditBlog(Blog model)
+        {
+            _repo.SaveBlog(model);
+            return RedirectToAction("Blogs", new { id = model.BlogGroup_Id });
+        }
+
+        /// <summary>
+        /// Delete Blog Section
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult DeleteBlog(int id)
+        {
+            return View(_repo.GetBlog(User.Identity.GetUserId(), id));
+        }
+
+        [HttpPost]
+        public ActionResult DeleteBlog(Blog model)
+        {
+            _repo.DeleteBlog(User.Identity.GetUserId(), model.Id);
+            return RedirectToAction("Blogs", new { id = model.BlogGroup_Id});
         }
     }
 }

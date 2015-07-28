@@ -16,7 +16,6 @@ namespace MyBlog.Data
         public IDbSet<BlogGroup> BlogGroups { get; set; }
         public IDbSet<Topic> Topics { get; set; }
 
-
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

@@ -20,5 +20,55 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    /*max-width: 50% !important;*/
+}
+
+
+.textareafor {
+    min-width: 100% !important;
+    min-height: 400px !important;
+    /*max-width: 100% !important;*/
+}
+
+
+.box {
+  background: #4e5d6c;
+  transition-property: background;
+  transition-duration: 1s;
+  transition-timing-function: linear;
+}
+.box:hover {
+  background: #52805B;
+}
+
+#bottom-navbar {
+    background-color:#52805B !important;
+}
+
+
+.box2 {
+    position: relative;
+    -webkit-animation-name: example; /* Chrome, Safari, Opera */
+    -webkit-animation-duration: 4s; /* Chrome, Safari, Opera */
+    -webkit-animation-iteration-count: infinite; /* Chrome, Safari, Opera */
+    animation-name: example;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes example {
+    0%   {background-color:#4e5d6c;}
+    50%  {background-color:#52805B; }
+}
+
+ /*Standard syntax*/
+@keyframes example {
+    0% {
+        background-color: #4e5d6c;
+    }
+
+    50% {
+        background-color: #52805B;
+    }
 }

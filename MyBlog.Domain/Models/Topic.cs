@@ -20,5 +20,11 @@ namespace MyBlog.Domain.Models
         public ICollection<BlogGroup> BlogGroups { get; set; }
 
 
+        public Topic()
+        {
+            this.IsActive = true;
+        }
+
+
     }
 }

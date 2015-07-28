@@ -12,7 +12,7 @@ namespace MyBlog.Data.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        GroupName = c.String(),
+                        GroupName = c.String(nullable: false),
                         GroupDescription = c.String(),
                         User_Id = c.String(maxLength: 128),
                         TimeCreated = c.DateTime(),
@@ -27,8 +27,8 @@ namespace MyBlog.Data.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Subject = c.String(),
-                        Message = c.String(),
+                        Subject = c.String(nullable: false),
+                        Message = c.String(nullable: false),
                         BlogGroup_Id = c.Int(nullable: false),
                         TimeCreated = c.DateTime(),
                         TimeModified = c.DateTime(),
